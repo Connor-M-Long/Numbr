@@ -3,6 +3,7 @@ import random
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from PIL import Image
 from services.Logic import Math
 
 class Data:
@@ -70,6 +71,6 @@ class Data:
         plt.imshow(current_image, interpolation='nearest')
         plt.savefig("./services/Configuration/Num.png")
 
-        #img = Image.open("./Server/Configuration/Num.png")
+        img = Image.open("./services/Configuration/Num.png")
 
-        return pred, lbl#, img
+        return pred, lbl, img

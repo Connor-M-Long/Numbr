@@ -22,19 +22,13 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-async def Logger(user: str, action: str, GUID: str):
-    time = datetime.datetime.now()
-
-    with open("logs.txt", "a") as f:
-        f.write(f"{GUID} | {user} has {action} at {time}\n")
-    
 @app.get("/getPredictions", response_model=None)
 async def get_Predictions():
     
     data = Process.Data()
-    pred, lbl = data.get_prediction()
+    pred, lbl, img = data.get_prediction()
 
-    return str(pred), str(lbl)
+    return str(pred), str(lbl), img.show()
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
