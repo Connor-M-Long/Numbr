@@ -28,8 +28,8 @@ async def Logger(user: str, action: str, GUID: str):
     with open("logs.txt", "a") as f:
         f.write(f"{GUID} | {user} has {action} at {time}\n")
     
-@app.get("/startups", response_model=None)
-async def get_StartUps():
+@app.get("/getPredictions", response_model=None)
+async def get_Predictions():
     
     data = Process.Data()
     pred, lbl = data.get_prediction()

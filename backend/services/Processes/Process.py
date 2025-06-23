@@ -2,7 +2,6 @@ import json
 import random
 import numpy as np
 import pandas as pd
-#from PIL import Image
 from matplotlib import pyplot as plt
 from services.Logic import Math
 
