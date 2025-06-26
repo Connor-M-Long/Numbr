@@ -28,7 +28,13 @@ async def get_Predictions():
     data = Process.Data()
     pred, lbl, img = data.get_prediction()
 
-    return str(pred), str(lbl), img.show()
+    returnDto = {
+    "Prediction": str(pred),
+    "Label": str(lbl),
+    "img": img.show()
+    }
+
+    return returnDto
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
