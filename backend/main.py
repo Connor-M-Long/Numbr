@@ -36,5 +36,20 @@ async def get_Predictions():
 
     return returnDto
 
+@app.get("/trainModel", response_model=None)
+async def train_Model():
+    
+    data = Process.Data()
+    w1, w2, b1, b2 = data.get_data()
+
+    returnDto = {
+    "W1": str(w1),
+    "W2": str(w2),
+    "B1": str(b1),
+    "B2": str(b2)
+    }
+
+    return returnDto
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

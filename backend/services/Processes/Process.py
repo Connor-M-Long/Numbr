@@ -11,7 +11,7 @@ class Data:
         pass
 
     def get_data(self):
-        data = pd.read_csv('train_info/train.csv')
+        data = pd.read_csv('./services/Configuration/train_info/train.csv')
 
         data = np.array(data)
         rows, columns = data.shape
@@ -45,6 +45,8 @@ class Data:
 
         with open('./services/Configuration/wbConfig.json', mode="w", encoding="utf-8") as file:
             json.dump(json_storedData, file, indent=4)
+
+        return W1.tolist(), W2.tolist(), b1.tolist(), b2.tolist()
 
     def get_prediction(self):
 

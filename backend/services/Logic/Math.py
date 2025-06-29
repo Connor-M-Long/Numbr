@@ -55,10 +55,10 @@ class NeuralNeural:
             Z1, A1, Z2, A2 = self.forward_prop(W1, b1, W2, b2, X)
             dW1, db1, dW2, db2 = self.backward_prop(Z1, A1, Z2, A2, W1, W2, X, Y)
             W1, b1, W2, b2 = self.update_params(W1, b1, W2, b2, dW1, db1, dW2, db2, alpha)
-            if i % 10 == 0:
-                print("Iteration: ", i)
-                predictions = self.get_predictions(A2)
-                print(self.get_accuracy(predictions, Y), "%")
+            #if i % 10 == 0:
+                # print("Iteration: ", i)
+                #predictions = self.get_predictions(A2)
+                # print(self.get_accuracy(predictions, Y), "%")
 
         return W1, b1, W2, b2
 
