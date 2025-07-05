@@ -71,8 +71,8 @@ class Data:
         current_image = ci.reshape((28, 28)) * 255
         plt.gray()
         plt.imshow(current_image, interpolation='nearest')
-        plt.savefig("./services/Configuration/Num.png")
+        plt.savefig("./static/images/Num.png")
 
-        img = Image.open("./services/Configuration/Num.png")
+        img = "http://localhost:8000/static/images/Num.png"
 
         return pred, lbl, img

@@ -3,12 +3,18 @@ import uvicorn
 import asyncio
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Annotated
 from sqlalchemy.orm import Session
 from services.Processes import Process
+import os
 
 app = FastAPI()
+
+os.makedirs("static/images", exist_ok=True)
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = [
     "http://localhost:8000"
@@ -31,7 +37,7 @@ async def get_Predictions():
     returnDto = {
     "Prediction": str(pred),
     "Label": str(lbl),
-    "img": img.show()
+    "img": str(img)
     }
 
     return returnDto
