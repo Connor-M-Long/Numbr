@@ -1,9 +1,6 @@
 "use client";
 import { get, train } from "../../lib/route";
-import React, {useState} from 'react';
-import path from 'path';
-import fs from 'fs';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 
 export default function Home() {
   const [apicall_getData, pred] = useState({
@@ -22,7 +19,7 @@ export default function Home() {
   const [refreshKey, setRefreshKey] = React.useState(Date.now());
         
   const refreshImage = () => {
-    setRefreshKey(Date.now()); // triggers new image fetch
+    setRefreshKey(Date.now());
   };
 
   const predict = async () => {
@@ -34,17 +31,22 @@ export default function Home() {
   const training = async () => {
     const data = await train(); 
     traindata(data);
-    displayTraingingData();
   }
 
-function displayTraingingData() {
-  const trainingData = document.getElementById("trainingData");
-  if (trainingData?.style.display === "none") {
-    if (trainingData) {
-      trainingData.style.display = trainingData.style.display === "none" ? "block" : "none";
-    }
-  }
-}
+  const [backend_URL, set_b_URL] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchURL = async () => {
+        const b_URL = (`${process.env.NEXT_PUBLIC_BACKEND_URL}/static/images/Num.png`);
+        set_b_URL(b_URL);
+    };
+
+    fetchURL();
+  }, []);
+
+  useEffect(() => {
+    predict();
+  }, []);
 
   return (
     <>
@@ -55,7 +57,7 @@ function displayTraingingData() {
     </div>
 
     <div className="text-white text-center border border-white-500 w-200 mx-auto mt-10">
-      <img className="w-150 h-1/4 mx-auto m-10" src={apicall_getData.img ? `${apicall_getData.img}?cache_bust=${refreshKey}` : ""}/>
+      <img className="w-150 h-1/4 mx-auto m-10" src={backend_URL ? `${backend_URL}?cache_bust=${refreshKey}` : ""}/>
       <div className="m-3">Prediction: {apicall_getData.Prediction}</div>
     </div>
 
@@ -69,10 +71,10 @@ function displayTraingingData() {
       <table className="table-fixed border-collapse overflow-y-contain border border-white-500">
         <thead>
           <tr>
-            <th className="border px-4 py-2">Weight 1</th>
-            <th className="border px-4 py-2">Weight 2</th>
-            <th className="border px-4 py-2">Bias 1</th>
-            <th className="border px-4 py-2">Bias 2</th>
+            <th className="border px-4 py-2 w-[250px]">Weight 1</th>
+            <th className="border px-4 py-2 w-[250px]">Weight 2</th>
+            <th className="border px-4 py-2 w-[250px]">Bias 1</th>
+            <th className="border px-4 py-2 w-[250px]">Bias 2</th>
           </tr>
         </thead>
         <tbody>
